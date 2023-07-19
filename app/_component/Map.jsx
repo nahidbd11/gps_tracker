@@ -44,7 +44,7 @@ const MyMap = () => {
 
     // Fetch user position initially and then every 2 seconds
     fetchUserPosition();
-    // const interval = setInterval(fetchUserPosition, 2000);
+    const interval = setInterval(fetchUserPosition, 2000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
