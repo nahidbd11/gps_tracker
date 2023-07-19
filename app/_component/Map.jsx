@@ -33,6 +33,7 @@ const MyMap = () => {
       navigator?.geolocation?.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position?.coords;
+          console.log(latitude, longitude);
           setUserPosition([latitude, longitude]);
         },
         (error) => {
@@ -43,13 +44,16 @@ const MyMap = () => {
 
     // Fetch user position initially and then every 2 seconds
     fetchUserPosition();
-    const interval = setInterval(fetchUserPosition, 2000);
+    // const interval = setInterval(fetchUserPosition, 2000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
   }, []);
 
-  const positions = [userPosition, [23.822601689546275, 90.36420522988678]];
+  const positions = [
+    [23.822337, 90.3654296],
+    [23.822601689546275, 90.36420522988678],
+  ];
 
   return (
     <MapContainer
