@@ -10,7 +10,7 @@ import {
   Polyline,
 } from "react-leaflet";
 import "leaflet-defaulticon-compatibility";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DraggableMarker from "./DraggleMarker";
 import { Icon } from "leaflet";
 
@@ -30,7 +30,8 @@ const customIcon = new Icon({
 });
 const MyMap = () => {
   const [userPosition, setUserPosition] = useState([0, 0]); // Default position (0, 0) for initial map center
-
+  // Create a mutable reference to the user marker
+  const userMarkerRef = useRef(null);
   useEffect(() => {
     const fetchUserPosition = () => {
       // Get the user's current position using the geolocation API
@@ -54,6 +55,12 @@ const MyMap = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (userMarkerRef.current) {
+      userMarkerRef.current.setLatLng(userPosition);
+    }
+  }, [userPosition]);
+
   const positions = [
     [23.822957788271157, 90.36413533021489],
     [23.822601689546275, 90.36420522988678],
@@ -72,7 +79,7 @@ const MyMap = () => {
         maxZoom={100}
       />
       <Polyline positions={positions} color="blue" />
-      <Marker position={userPosition} icon={customIcon}>
+      <Marker position={userPosition} icon={customIcon} ref={userMarkerRef}>
         <Popup>Your Current Position</Popup>
       </Marker>
       <Marker position={endPosition}>
