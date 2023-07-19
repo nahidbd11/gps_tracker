@@ -55,11 +55,11 @@ const MyMap = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (userMarkerRef.current) {
-      userMarkerRef.current.setLatLng(userPosition);
-    }
-  }, [userPosition]);
+  //   useEffect(() => {
+  //     if (userMarkerRef.current) {
+  //       userMarkerRef.current.setLatLng(userPosition);
+  //     }
+  //   }, [userPosition]);
 
   const positions = [
     [23.822957788271157, 90.36413533021489],
@@ -79,7 +79,7 @@ const MyMap = () => {
         maxZoom={100}
       />
       <Polyline positions={positions} color="blue" />
-      <Marker position={userPosition} icon={customIcon} ref={userMarkerRef}>
+      <Marker position={userPosition}>
         <Popup>Your Current Position</Popup>
       </Marker>
       <Marker position={endPosition}>
