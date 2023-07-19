@@ -22,7 +22,7 @@ const markerList = [
   },
 ];
 
-const endPosition = [23.7662, 90.3589];
+const endPosition = [23.822601689546275, 90.36420522988678];
 
 const MyMap = () => {
   const [userPosition, setUserPosition] = useState([0, 0]); // Default position (0, 0) for initial map center
@@ -49,7 +49,7 @@ const MyMap = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const positions = [userPosition, [23.7662, 90.3589]];
+  const positions = [userPosition, [23.822601689546275, 90.36420522988678]];
 
   return (
     <MapContainer
@@ -61,7 +61,7 @@ const MyMap = () => {
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        maxZoom={19}
+        maxZoom={100}
       />
       <Polyline positions={positions} color="blue" />
       <Marker position={userPosition}>
