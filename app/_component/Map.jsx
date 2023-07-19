@@ -10,9 +10,8 @@ import {
   Polyline,
 } from "react-leaflet";
 import "leaflet-defaulticon-compatibility";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DraggableMarker from "./DraggleMarker";
-import { Icon } from "leaflet";
 
 const markerList = [
   {
@@ -24,18 +23,14 @@ const markerList = [
 ];
 
 const endPosition = [23.822601689546275, 90.36420522988678];
-const customIcon = new Icon({
-  iconUrl: "/images/location.png",
-  iconSize: [25, 40],
-});
+
 const MyMap = () => {
   const [userPosition, setUserPosition] = useState([0, 0]); // Default position (0, 0) for initial map center
-  // Create a mutable reference to the user marker
-  const userMarkerRef = useRef(null);
+
   useEffect(() => {
     const fetchUserPosition = () => {
       // Get the user's current position using the geolocation API
-      navigator?.geolocation?.getCurrentPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position?.coords;
           console.log(latitude, longitude);
@@ -47,19 +42,13 @@ const MyMap = () => {
       );
     };
 
-    // Fetch user position initially and then every .5 seconds
+    // Fetch user position initially and then every 2 seconds
     fetchUserPosition();
-    const interval = setInterval(fetchUserPosition, 500);
+    const interval = setInterval(fetchUserPosition, 2000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
   }, []);
-
-  //   useEffect(() => {
-  //     if (userMarkerRef.current) {
-  //       userMarkerRef.current.setLatLng(userPosition);
-  //     }
-  //   }, [userPosition]);
 
   const positions = [
     [23.822957788271157, 90.36413533021489],
