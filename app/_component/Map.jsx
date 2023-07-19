@@ -12,6 +12,7 @@ import {
 import "leaflet-defaulticon-compatibility";
 import React, { useEffect, useState } from "react";
 import DraggableMarker from "./DraggleMarker";
+import { Icon } from "leaflet";
 
 const markerList = [
   {
@@ -21,7 +22,10 @@ const markerList = [
     position: [23.7662, 90.3589],
   },
 ];
-
+const customIcon = new Icon({
+  iconUrl: "/images/location.png",
+  iconSize: [25, 40],
+});
 const endPosition = [23.822601689546275, 90.36420522988678];
 
 const MyMap = () => {
@@ -68,7 +72,7 @@ const MyMap = () => {
         maxZoom={100}
       />
       <Polyline positions={positions} color="blue" />
-      <Marker position={userPosition}>
+      <Marker position={userPosition} icon={customIcon}>
         <Popup>Your Current Position</Popup>
       </Marker>
       <Marker position={endPosition}>
